@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const img = document.getElementById('fotoIA');
   if (!img) return;
 
-  const images = ['img1.jpg', 'img3.jpg'];
+  const images = ['img1.jpg', 'img2.jpg'];
 
   images.forEach(src => { const i = new Image(); i.src = src; });
 

@@ -1,25 +1,27 @@
-const img = document.getElementById('FondoIA');
+document.addEventListener('DOMContentLoaded', () => {
+  const img = document.getElementById('fotoIA');
+  if (!img) return;
 
+  const images = ['img1.jpg', 'img3.jpg'];
 
-const A = 'img1.jpg';
-const B = 'img2.jpg';
+  images.forEach(src => { const i = new Image(); i.src = src; });
 
-[A, B].forEach(src => {
-    const preload = new Image();
-    preload.src = src;
-});
+  let idx = images.indexOf(img.getAttribute('src'));
+  if (idx === -1) idx = 0;
 
-function toggleImage() {
-  const isA = img.src.includes(A);
-  img.src = isA ? B : A;
-  img.alt = isA ? 'Ilustración alternativa de Inteligencia Artificial' : 'Ilustración de Inteligencia Artificial';
-}
-
-img.addEventListener('click', toggleImage);
-
-img.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' || e.key === ' ') {
-    e.preventDefault();
-    toggleImage();
+  function toggle() {
+    idx = (idx + 1) % images.length;
+    img.setAttribute('src', images[idx]);
+    img.setAttribute('alt', idx === 0 ? 'Imagen 1 de IA' : 'Imagen 2 de IA');
   }
+
+  img.addEventListener('click', toggle);
+
+  // Accesible por teclado
+  img.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggle();
+    }
+  });
 });

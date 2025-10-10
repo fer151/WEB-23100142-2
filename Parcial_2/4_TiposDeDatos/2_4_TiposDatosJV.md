@@ -1,4 +1,4 @@
-# 🧠 Tipos de datos en JavaScript
+#  Tipos de datos en JavaScript
 
 | Tipo de Dato | Categoría | Resultado de `typeof` | Ejemplo | Descripción |
 |---------------|------------|-----------------------|----------|--------------|
@@ -11,4 +11,5 @@
 | `symbol` | Primitivo | `"symbol"` | `Symbol('id')` | Crea identificadores únicos. |
 | `object` | No primitivo | `"object"` | `{ nombre: "Ana", edad: 20 }` | Colección de pares clave–valor; puede incluir arreglos y funciones. |
 
+### Fernando Guadalupe Campos Villanueva - 23100142
 ---

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="brn">Peticion </button>
+    <button id="brn1">PeticionFetch</button>
+    <button id="brn2">PeticionAsync-Await</button>
+    <div id="contenido"></div>
+    <img id="foto" alt="Perro" />
+    <script>
+        document.getElementById("brn").addEventListener("click", cargarContenidoXMLH);
+        document.getElementById("brn1").addEventListener("click", cargarContenidoFetch);
+        function cargarContenidoFetch() {
+            (async () => {
+                const res = await fetch("https://dog.ceo/api/breeds/image/random");
+                const data = await res.json();
+                document.getElementById("foto").src = data.message;
+            })();
+        }
+        function cargarContenidoXMLH() {
+            let Solicitud = new XMLHttpRequest();
+
+            Solicitud.onload = function () {
+
+                console.log(Solicitud.response);
+                let ObjetoJs = JSON.parse(Solicitud.response);
+                console.log(ObjetoJs);
+                document.getElementById("contenido").innerHTML = ObjetoJs.message;
+            }
+            Solicitud.open("GET", "https://dog.ceo/api/breeds/image/random", true);
+            Solicitud.send();
+
+            (async () => {
+            const res = await fetch("https://dog.ceo/api/breeds/image/random");
+            const data = await res.json();
+            document.getElementById("foto").src = data.message;
+            })();
+
+        }
+        document.getElementById("brn2").addEventListener("click", cargarContenidoAsyncAwait);
+        async function cargarContenidoAsyncAwait() {
+      try {
+        const res = await fetch("https://dog.ceo/api/breeds/image/random");
+        if (!res.ok) throw new Error("Error en la respuesta de la API");
+        const { message } = await res.json();
+        const img = document.getElementById("foto");
+        img.src = message;
+        img.alt = "Perro aleatorio (async/await)";
+      } catch (err) {
+        console.error(err);
+        document.getElementById("contenido").textContent = "Ocurrió un error. Intenta de nuevo.";
+      }
+    }
+        
+    </script>
+</body>
+
+</html>

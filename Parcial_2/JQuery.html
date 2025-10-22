@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+</head>
+
+<body>
+    <button id="brn">Peticion </button>
+    <button id="brn1">PeticionFetch</button>
+    <div id="contenido"></div>
+    <img id="foto" alt="Perro" />
+    <script>
+        document.getElementById("brn").addEventListener("click", cargarContenidoXMLH);
+        document.getElementById("brn1").addEventListener("click", cargarContenidoFetch);
+        function cargarContenidoFetch() {
+            (async () => {
+                const res = await fetch("https://dog.ceo/api/breeds/image/random");
+                const data = await res.json();
+                document.getElementById("foto").src = data.message;
+            })();
+        }
+        function cargarContenidoXMLH() {
+            let Solicitud = new XMLHttpRequest();
+
+            Solicitud.onload = function () {
+
+                console.log(Solicitud.response);
+                let ObjetoJs = JSON.parse(Solicitud.response);
+                console.log(ObjetoJs);
+                document.getElementById("contenido").innerHTML = ObjetoJs.message;
+            }
+            Solicitud.open("GET", "https://dog.ceo/api/breeds/image/random", true);
+            Solicitud.send();
+
+            (async () => {
+            const res = await fetch("https://dog.ceo/api/breeds/image/random");
+            const data = await res.json();
+            document.getElementById("foto").src = data.message;
+            })();
+
+        }
+        
+    </script>
+</body>
+
+</html>
